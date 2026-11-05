@@ -7,6 +7,7 @@ argument-hint: '[场景：新工程|新需求|接口|业务|UI] 或直接描述�
 # Flutter 规范开发 Playbook 调度（项目级 · 随仓库分发）
 
 三级 Rules + 索引式 AGENTS.md 体系的流程入口（flutter-dev-kit 项目模式）。
+**完整流程总纲（新建项目 / 新增业务两条主线，标注用户与 Agent 分工）：先读 [WORKFLOW.md](rules/WORKFLOW.md)**
 
 ## 规则库定位
 

@@ -14,6 +14,8 @@ name: Flutter 规范开发
 
 ## 启动序列（每次会话先执行）
 
+0. 主流程总纲（两条主线：新建项目/新增业务，含用户与你的分工边界）：读
+   `.github/skills/flutter-dev-playbook/rules/WORKFLOW.md`，按其阶段推进
 1. 读当前仓库根 `AGENTS.md`（宪法：命令/目录/路由表/红线）
    - 不存在且用户要新建工程 → 按 `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-PROJECT.md` 执行（选型先问用户）
 2. 读 `docs/INTAKE.md`（若有）：核对产品规划 / 接口文档 / Figma 材料是否齐

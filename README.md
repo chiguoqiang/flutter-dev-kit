@@ -9,6 +9,8 @@
 
 ## 快速开始（任何人，3 步）
 
+> 完整流程图与每步的用户/Agent 分工，见 `skills/flutter-dev-playbook/rules/WORKFLOW.md`。
+
 **方式一 · 一键初始化新工程（最常用）**——空文件夹 → 配齐一切的完整工程：
 
 ```bash
@@ -68,6 +70,7 @@ flutter-dev-kit/
 ├── skills/flutter-dev-playbook/        # ★ Skill 与规则库一体分发
 │   ├── SKILL.md                        #   调度入口（场景分派）
 │   └── rules/                          #   规则唯一源
+│       ├── WORKFLOW.md                 #   ★ AI Coding 完整流程总纲（新建项目/新增业务）
 │       ├── GUIDE.md                    #   方法论：三级 Rules + 索引式 AGENTS.md
 │       ├── CHECKLIST.md                #   初始化/季度审计清单
 │       ├── INTAKE.md                   #   材料交接清单（文档驱动开发入口）
