@@ -1,7 +1,7 @@
 # 材料交接清单（INTAKE）
 
 > 用法：把下面四类材料按"给法"放入项目或直接发给 Agent，然后说"开始开发"。
-> Agent 按 `ai-coding-rules/flutter/` 的 Playbook 自主实现，完成后一次性汇报：
+> Agent 按 `.github/skills/flutter-dev-playbook/rules/flutter/` 的 Playbook 自主实现，完成后一次性汇报：
 > 交付清单 / 验证结果（analyze+test）/ 待确认决策 / 遗留项。
 
 ## 必需材料

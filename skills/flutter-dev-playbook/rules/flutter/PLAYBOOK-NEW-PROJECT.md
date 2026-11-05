@@ -32,10 +32,15 @@ flutter run        # 冒烟：能跑再继续
 
 ```bash
 mkdir -p lib/theme lib/models lib/services lib/pages lib/widgets \
-         test/models test/services test/pages docs
-# 规则库随项目入库（<规则库> = canonical 库路径或 flutter-dev-kit clone 路径）：
-cp -R <规则库>/ai-coding-rules docs/
-cp docs/ai-coding-rules/INTAKE.md docs/INTAKE.md   # 材料交接清单放项目根 docs/
+         test/models test/services test/pages docs/api docs/biz docs/ui docs/features
+```
+
+规则库与 Skill 一体分发，由 flutter-dev-kit 的 `install.sh` 自动完成（手动等价操作）：
+
+```text
+kit: skills/flutter-dev-playbook/{SKILL.md, rules/} → 工程: .github/skills/flutter-dev-playbook/
+kit: agents/flutter-dev.agent.md                  → 工程: .github/agents/
+kit: skills/.../rules/INTAKE.md                   → 工程: docs/INTAKE.md（材料清单）
 ```
 
 目标结构（后续所有代码都有唯一归处）：

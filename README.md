@@ -47,7 +47,7 @@ cd flutter-dev-kit && ./install.sh          # Skill→~/.agents/skills + Agent�
 
 ## 文档驱动开发（第三种，最省心）
 
-把以下材料放进项目 `docs/`（清单见 `ai-coding-rules/INTAKE.md`）：
+把以下材料放进项目 `docs/`（清单见 `docs/INTAKE.md`，init 时自动生成）：
 
 | 材料 | 放哪 | 缺省降级 |
 |---|---|---|
@@ -64,40 +64,48 @@ cd flutter-dev-kit && ./install.sh          # Skill→~/.agents/skills + Agent�
 
 ```text
 flutter-dev-kit/
-├── install.sh                  # 一键安装（把模板里的路径占位符替换为你的 clone 路径）
-├── copilot/
-│   ├── skill-template/SKILL.md     # Skill 模板（含 __CANONICAL_PATH__ 占位符）
-│   └── agent-template/flutter-dev.agent.md  # 自定义 Agent 模板
-└── ai-coding-rules/            # ★ 规则唯一源（canonical 库）
-    ├── GUIDE.md                # 方法论：三级 Rules + 索引式 AGENTS.md
-    ├── CHECKLIST.md            # 初始化/季度审计清单
-    ├── INTAKE.md               # 材料交接清单（文档驱动开发入口）
-    ├── templates/              # 通用三层规则模板（L1/L2/L3）
-    └── flutter/                # Flutter 全套
-        ├── L1/L2/L3 规则（全局/项目/网络·模型·UI·状态·测试）
-        └── PLAYBOOK×5：新工程 / 新需求 / 新接口 / 业务逻辑 / Figma→页面
+├── install.sh                          # 一键安装（无参=初始化工程 / --project / --personal）
+├── skills/flutter-dev-playbook/        # ★ Skill 与规则库一体分发
+│   ├── SKILL.md                        #   调度入口（场景分派）
+│   └── rules/                          #   规则唯一源
+│       ├── GUIDE.md                    #   方法论：三级 Rules + 索引式 AGENTS.md
+│       ├── CHECKLIST.md                #   初始化/季度审计清单
+│       ├── INTAKE.md                   #   材料交接清单（文档驱动开发入口）
+│       ├── templates/                  #   通用三层规则模板（L1/L2/L3）
+│       └── flutter/                    #   Flutter 全套（L1/L2/L3 + PLAYBOOK×5）
+├── agents/flutter-dev.agent.md         # 自定义 Agent（引用 Skill 内 rules/）
+└── preset/                             # 工程预设（AGENTS.md×6 占位符版 + 基础设施代码）
 ```
 
-**分层原理**（详见 `ai-coding-rules/GUIDE.md`）：
+注入工程后的形态（全部随仓库 Git 分发，同事 clone 零配置）：
+
+```text
+你的工程/
+├── .github/
+│   ├── skills/flutter-dev-playbook/{SKILL.md, rules/}   ← 一体拷贝
+│   ├── agents/flutter-dev.agent.md
+│   └── copilot-instructions.md
+└── docs/                                ← 产品文档区（product.md 模板 + INTAKE + api/biz/ui）
+```
+
+**分层原理**（详见 `skills/flutter-dev-playbook/rules/GUIDE.md`）：
 
 | 层 | 形态 | 加载 |
 |---|---|---|
 | 宪法 | 各仓库 `AGENTS.md`（根 + 模块 L3） | 自动常驻 |
-| 流程 | 5 条 Playbook（文档，非代码） | 按需读取 |
-| 调度 | Skill `flutter-dev-playbook`（~/.agents/skills） | 关键词触发 / 斜杠 |
-| 执行 | Agent「Flutter 规范开发」（VS Code 用户级） | Agent 选择器 |
+| 流程 | 5 条 Playbook（Skill 内 rules/） | 按需读取 |
+| 调度 | Skill `flutter-dev-playbook`（.github/skills 或 ~/.agents/skills） | 关键词触发 / 斜杠 |
+| 执行 | Agent「Flutter 规范开发」 | Agent 选择器 |
 
-规则只在 `ai-coding-rules/` 维护一份；Skill/Agent 是薄壳，新项目由 Agent 自动把规则库拷进
-项目 `docs/`（项目内优先于 canonical）。
+规则只在 `skills/flutter-dev-playbook/rules/` 维护一份，随 Skill 整体分发到工程或个人目录。
 
 ## FAQ
 
-- **团队共享？** 不装个人 Skill，改为把 kit 中 `copilot/skill-template` 改名放进仓库
-  `.github/skills/flutter-dev-playbook/SKILL.md`（正文引用 `docs/ai-coding-rules/` 相对路径），
-  随仓库推送，同事零配置。
+- **团队共享？** 默认就是：`install.sh`（无参）或 `--project` 把 Skill+规则库整体放进工程
+  `.github/skills/flutter-dev-playbook/`，随仓库推送，同事 clone 零配置。
 - **Claude Code / Codex / Cursor？** 体系生成的每个项目自带 `CLAUDE.md`(@AGENTS.md) 与
   `.cursor/rules`、`.github/copilot-instructions.md` 适配薄层，见 GUIDE §5。
-- **更新版本？** `git pull && ./install.sh`（重装即覆盖，规则库以 canonical 为准同步到项目）。
+- **更新版本？** 上游 `git pull` 后对老工程重跑 `--project`（或删除工程内 skill 目录后重跑）。
 - **卸载？** 删除 `~/.agents/skills/flutter-dev-playbook/` 与 VSCode prompts 下的
   `flutter-dev.agent.md`。
 

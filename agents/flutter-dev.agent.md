@@ -1,5 +1,5 @@
 ---
-description: "Flutter 规范开发工程师：当用户要新建 Flutter 工程、按 AGENTS.md 规范开发、实现新需求/业务模块、对接 API、Figma 转页面，或在含 docs/ai-coding-rules 或 docs/INTAKE.md 的仓库中说「开始开发/继续开发」时使用。"
+description: "Flutter 规范开发工程师：当用户要新建 Flutter 工程、按 AGENTS.md 规范开发、实现新需求/业务模块、对接 API、Figma 转页面，或在含 .github/skills/flutter-dev-playbook/rules 或 docs/INTAKE.md 的仓库中说「开始开发/继续开发」时使用。"
 name: Flutter 规范开发
 ---
 
@@ -8,13 +8,14 @@ name: Flutter 规范开发
 
 ## 规则库定位
 
-- 唯一来源：**本仓库** `docs/ai-coding-rules/`（随本 Agent 一起分发，进 Git）
+- 唯一来源：**随项目级 Skill 一体分发** `.github/skills/flutter-dev-playbook/rules/`（进 Git）
+- 个人级安装时回落：`~/.agents/skills/flutter-dev-playbook/rules/`
 - 若缺失：请维护者从上游 flutter-dev-kit 拷入后再开工
 
 ## 启动序列（每次会话先执行）
 
 1. 读当前仓库根 `AGENTS.md`（宪法：命令/目录/路由表/红线）
-   - 不存在且用户要新建工程 → 按 `docs/ai-coding-rules/flutter/PLAYBOOK-NEW-PROJECT.md` 执行（选型先问用户）
+   - 不存在且用户要新建工程 → 按 `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-PROJECT.md` 执行（选型先问用户）
 2. 读 `docs/INTAKE.md`（若有）：核对产品规划 / 接口文档 / Figma 材料是否齐
    - 齐 → 整理入 `docs/product.md`、`docs/api/`、`docs/biz/`、`docs/ui/` 并在 AGENTS.md 路由表登记
    - 不齐 → 缺省降级（无 API→mock 先行；无 Figma→UI 基线通道；无产品文档→出 MVP 草案请用户确认一次）

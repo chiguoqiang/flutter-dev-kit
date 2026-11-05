@@ -13,7 +13,7 @@ class ApiException implements Exception {
 }
 
 /// 全项目唯一 HTTP 出口：UI 层禁止 import dio、禁止拼 URL、禁止手写 JSON 编解码。
-/// 新增接口流程见 docs/ai-coding-rules/flutter/PLAYBOOK-NEW-API.md。
+/// 新增接口流程见 .github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-API.md。
 class ApiClient {
   ApiClient._();
   static final ApiClient instance = ApiClient._();

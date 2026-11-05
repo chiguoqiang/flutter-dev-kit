@@ -40,14 +40,14 @@ flutter build ipa               # iOS 构建（需签名）
 
 | 触碰区域 | 先读 | 一句话原因 |
 |---|---|---|
-| 任何新需求 | `docs/ai-coding-rules/flutter/PLAYBOOK-NEW-FEATURE.md` | 需求卡 + 按层补齐流程 |
+| 任何新需求 | `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-FEATURE.md` | 需求卡 + 按层补齐流程 |
 | 接口对接 / 新增接口 | `docs/api/<域名>.md`（无则先按 `API-DOC-TEMPLATE.md` 建立） | 契约、字段可空性与坑 |
 | 业务规则（绩效/任务/客户域） | `docs/biz/<域名>.md`（无则先按 `BIZ-DOC-TEMPLATE.md` 建立） | 规则表、状态机、边界算例 |
 | 页面 UI 实现 | `docs/ui/<页面名>.md`（无则先按 `UI-DOC-TEMPLATE.md` 建立） | 四态、事件表、文案 |
-| 新建工程级变更 | `docs/ai-coding-rules/flutter/PLAYBOOK-NEW-PROJECT.md` | 选型与结构基准 |
+| 新建工程级变更 | `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-PROJECT.md` | 选型与结构基准 |
 | 产品规划 / 模块优先级 | `docs/product.md`（材料交接见 `docs/INTAKE.md`） | 模块清单与 MVP 边界 |
 
-> 以上四份模板都在 `docs/ai-coding-rules/flutter/`。
+> 以上四份模板都在 `.github/skills/flutter-dev-playbook/rules/flutter/`。
 
 ## 约定
 

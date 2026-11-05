@@ -20,7 +20,7 @@
 
 - JSON 解码在本层完成；禁止把 `Map<String, dynamic>` 泄露给 UI
 - 字段缺失是常态：解析容错（默认值/可空），单字段出错不能炸掉整个请求
-- 新增接口的完整流程见 `docs/ai-coding-rules/flutter/PLAYBOOK-NEW-API.md`（先建 `docs/api/` 文档）
+- 新增接口的完整流程见 `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-API.md`（先建 `docs/api/` 文档）
 
 ## 测试
 

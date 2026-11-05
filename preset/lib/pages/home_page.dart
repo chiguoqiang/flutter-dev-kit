@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 /// 工作台首页（占位骨架：接入真实需求时按 docs/ui/home_page.md 替换，
-/// 流程见 docs/ai-coding-rules/flutter/PLAYBOOK-UI-PAGE.md）
+/// 流程见 .github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-UI-PAGE.md）
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             Text('业务模块待接入', style: theme.textTheme.bodyLarge),
             const SizedBox(height: AppTheme.gap8),
             Text(
-              '按 docs/ai-coding-rules 的 Playbook 逐模块补齐',
+              '按 .github/skills/flutter-dev-playbook/rules 的 Playbook 逐模块补齐',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.outline,
               ),

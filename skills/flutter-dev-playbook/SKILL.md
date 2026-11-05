@@ -4,28 +4,27 @@ description: '按三级 Rules 规范体系开发 Flutter：新建 Flutter 工程
 argument-hint: '[场景：新工程|新需求|接口|业务|UI] 或直接描述任务'
 ---
 
-# Flutter 规范开发 Playbook 调度
+# Flutter 规范开发 Playbook 调度（项目级 · 随仓库分发）
 
-三级 Rules + 索引式 AGENTS.md 体系的流程入口（flutter-dev-kit）。
+三级 Rules + 索引式 AGENTS.md 体系的流程入口（flutter-dev-kit 项目模式）。
 
-## 规则库定位（每次启动按序查找，命中即用）
+## 规则库定位
 
-1. 当前仓库 `docs/ai-coding-rules/`（项目自带拷贝，**优先**）
-2. 安装时注册的 canonical 库：`__CANONICAL_PATH__/ai-coding-rules/`
-3. 都不存在 → 请用户安装 flutter-dev-kit（clone + ./install.sh），或授权你从
-   canonical 库把 `ai-coding-rules/` 拷入当前项目 `docs/`
+- 唯一来源：**本 Skill 目录内的 `rules/`**（随 Skill 一体分发，进 Git）
+  - 项目级安装时即 `.github/skills/flutter-dev-playbook/rules/`
+  - 个人级安装时即 `~/.agents/skills/flutter-dev-playbook/rules/`
+- 若缺失（目录被裁剪）：请维护者从上游 flutter-dev-kit 拷入后再开工
 
-## 启动判定
+## 启动判定（每次先做）
 
 1. 当前仓库根有 `AGENTS.md`？
    - **有** → 它是本项目宪法，先完整读它（命令/目录/路由表/红线）
-   - **没有** → 若用户要新建工程：按 canonical 的
-     `flutter/PLAYBOOK-NEW-PROJECT.md` 执行（选型未定先问用户；含拷规则库进项目 docs/）
-2. 有 `docs/INTAKE.md`？→ 核对 product / api / figma 材料是否就位，缺项按降级策略推进
+   - **没有** → 按 `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-PROJECT.md` 补齐（选型先问用户）
+2. 有 `docs/INTAKE.md`？→ 核对 product/api/figma 材料是否就位，缺项按降级策略推进
 
 ## 场景分派
 
-| 用户意图 | 执行文件（规则库内 flutter/） |
+| 用户意图 | 执行文件（.github/skills/flutter-dev-playbook/rules/flutter/） |
 |---|---|
 | 新建 Flutter 工程 / 搭项目 | `PLAYBOOK-NEW-PROJECT.md`（选型→骨架→基础设施→规则落地→验证→Git） |
 | 新需求 / 新模块（未指明类型） | `PLAYBOOK-NEW-FEATURE.md` 先归类 A~E，再进对应详细流程 |
