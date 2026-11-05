@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# flutter-dev-kit 安装器（三种模式）
-#   初始化新工程（最常用）: mkdir myapp && cd myapp && git clone <kit> && ./flutter-dev-kit/install.sh --init ["一句话描述"]
-#   注入已有工程（团队共享）: ./install.sh --project <工程路径>
-#   个人级（本机一次）    : ./install.sh [--skill|--agent]
+# flutter-dev-kit 安装器
+#   初始化新工程（最常用·无参数）: cd 空目录后 ./flutter-dev-kit/install.sh ["一句话描述"]
+#   注入已有工程（团队共享）    : ./install.sh --project <工程路径>
+#   个人级（本机一次）        : ./install.sh --personal [--skill|--agent 可单选]
 set -euo pipefail
 
 KIT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -40,8 +40,8 @@ init_project() {
   local dir="$PWD" raw title desc name
   raw="$(basename "$dir")"
   name="$(echo "$raw" | tr '-' '_')"
-  title="${2:-$raw}"
-  desc="${3:-一句话定位：给谁用、解决什么（可运行后编辑根 AGENTS.md 修改）}"
+  title="${1:-$raw}"
+  desc="${2:-一句话定位：给谁用、解决什么（可编辑根 AGENTS.md 修改）}"
 
   command -v flutter >/dev/null || { echo "❌ 未找到 flutter，请先安装 Flutter SDK"; exit 1; }
   [ -f "$dir/pubspec.yaml" ] && { echo "❌ 当前目录已有 Flutter 工程（pubspec.yaml 存在），新建工程请换空目录"; exit 1; }
@@ -96,13 +96,37 @@ EOF
   cp "$PRESET/test/AGENTS.md" test/AGENTS.md
   sed "s|__APP_NAME__|$name|g" "$PRESET/test/widget_test.dart" > test/widget_test.dart
 
-  echo "▶ 5/5 验证…"
+  echo "▶ 5/6 清理脚手架…"
+  local kit_gone=0
+  case "$KIT_ROOT" in
+    "$dir"/*) rm -rf "$KIT_ROOT" && kit_gone=1 ;;
+  esac
+  [ "$kit_gone" = 1 ] && echo "   🧹 已自动删除 flutter-dev-kit/（工程自包含，无嵌套仓库）" \
+    || echo "   ℹ️  kit 位于工程外，未删除"
+
+  echo "▶ 6/6 验证 + Git 初始化…"
   flutter analyze >/dev/null 2>&1 && echo "   ✅ flutter analyze 零 error" || echo "   ⚠️ analyze 有告警，可稍后处理"
+  if git rev-parse --git-dir >/dev/null 2>&1; then
+    echo "   ⏭️  已是 git 仓库，跳过 init"
+  else
+    git init -q
+  fi
+  git add -A
+  if git commit -qm "chore: bootstrap with flutter-dev-kit (rules & infra)" 2>/dev/null; then
+    echo "   ✅ 首次提交完成"
+  else
+    echo "   ⚠️ 提交失败（git user 未配置?）：请 git config user.name/email 后重新 commit"
+  fi
+
   echo
   echo "🎉 工程已配齐：$dir"
   echo "   📁 产品文档 → docs/product.md（模板已生成）；接口/Figma 给法见 docs/INTAKE.md"
   echo "   ▶ 下一步：把产品信息填进 docs/product.md → 对 Copilot 说「开始开发」"
-  echo "   🧹 本目录下的 flutter-dev-kit/ 已完成使命，可删除（工程完全自包含）"
+
+  # 收尾：自删 kit 目录（必须是本函数最后动作；仅当 kit 位于工程内）
+  case "$KIT_ROOT" in
+    "$dir"/*) rm -rf "$KIT_ROOT" ;;
+  esac
 }
 
 # ---------- 项目级注入：Skill/Agent + 规则库写入已有工程 ----------
@@ -132,23 +156,27 @@ install_project() {
   echo "📌 之后在工程里放产品文档（见 docs/INTAKE.md），对 Copilot 说「开始开发」即可。"
 }
 
-case "${1:-all}" in
+case "${1:-}" in
+  "")
+    # 无参数 = 初始化当前目录（最常用）
+    [ "$PWD" = "$KIT_ROOT" ] && { echo "❌ 请在目标空文件夹里运行（可先 cd 到目标目录），在 kit 目录内请用 --personal"; exit 1; }
+    init_project ;;
   --init)
-    shift
-    init_project "$@" ;;
+    shift; init_project "$@" ;;
   --skill) install_skill ;;
   --agent) install_agent ;;
-  --project)
-    [ $# -ge 2 ] || { echo "用法: ./install.sh --project <工程路径>"; exit 1; }
-    install_project "$2" ;;
-  all)
+  --personal)
     install_skill; install_agent
-    echo
-    echo "提示：团队共享请改用  ./install.sh --project <工程路径>（Skill/Agent 进工程 .github/，随仓库分发）"
     echo
     echo "下一步："
     echo "  1) 重启 VS Code（或 Reload Window）使 Skill/Agent 生效"
     echo "  2) 新建工程：对 Copilot 说「新建一个 Flutter 工程，按 flutter-dev-playbook 规范」"
     echo "  3) 文档开发：把产品文档按 ai-coding-rules/INTAKE.md 放入项目 docs/，切到「Flutter 规范开发」Agent 说「开始开发」" ;;
-  *) echo "用法: ./install.sh [--init [\"一句话描述\"] | --project <工程路径> | --skill | --agent]"; exit 1 ;;
+  --project)
+    [ $# -ge 2 ] || { echo "用法: ./install.sh --project <工程路径>"; exit 1; }
+    install_project "$2" ;;
+  -*) echo "用法: ./install.sh ["一句话描述"] | --project <工程路径> | --personal | --skill | --agent"; exit 1 ;;
+  *)
+    # 位置参数 = 带描述初始化：./flutter-dev-kit/install.sh "给谁用、解决什么"
+    init_project "$@" ;;
 esac

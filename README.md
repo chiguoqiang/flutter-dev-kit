@@ -14,14 +14,14 @@
 ```bash
 mkdir myapp && cd myapp                                  # ① 建个空文件夹
 git clone https://github.com/chiguoqiang/flutter-dev-kit.git
-./flutter-dev-kit/install.sh --init "一句话：给谁用、解决什么"   # ② 一键配齐
+./flutter-dev-kit/install.sh "一句话：给谁用、解决什么"    # ② 一键配齐（描述可省略）
 # ③ 打开 VS Code → 填 docs/product.md → 对 Copilot 说「开始开发」
 ```
 
 一条命令完成后你会得到：Flutter 工程（默认选型 Riverpod+dio+go_router+json_serializable+mocktail）
 + 基础设施代码（ApiClient/主题/路由）+ 全部规则（AGENTS.md×6 + Playbook×5）
 + `.github/` 内 Skill/Agent（clone 即共享）+ **`docs/` 文档区（含 product.md 模板）**。
-生成后 `flutter-dev-kit/` 目录即可删除，工程完全自包含。
+脚本还会自动 `git init` + 首次提交，并**自动删除 flutter-dev-kit/ 目录**——工程自包含，无嵌套仓库冲突。
 
 **方式二 · 注入已有工程（团队共享）**：
 
