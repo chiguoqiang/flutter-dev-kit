@@ -9,17 +9,25 @@
 
 ## 快速开始（任何人，3 步）
 
+**方式一 · 项目级（推荐，团队共享）**——Skill/Agent 和规则库全部装进**你的工程**，随 Git 分发，同事 clone 零配置：
+
 ```bash
-# 1. 下载
-git clone https://github.com/chiguoqiang/flutter-dev-kit.git && cd flutter-dev-kit
+# 1. 下载工具包
+git clone https://github.com/chiguoqiang/flutter-dev-kit.git
 
-# 2. 安装（注册 Skill 到 ~/.agents/skills + Agent 到 VS Code 用户级 prompts）
-./install.sh
+# 2. 注入目标工程（Skill→.github/skills，Agent→.github/agents，规则库→docs/）
+./flutter-dev-kit/install.sh --project /path/to/你的工程
 
-# 3. 使用：在任意目录对 Copilot 说——
-#    「新建一个 Flutter 工程，按 flutter-dev-playbook 规范」
-#    或在已有项目里放入产品文档后说「开始开发」
+# 3. 提交工程后，任何人 clone 即得；在工程里对 Copilot 说「开始开发」
 ```
+
+**方式二 · 个人级**——本机装一次，所有项目可用（无需逐工程注入）：
+
+```bash
+cd flutter-dev-kit && ./install.sh          # Skill→~/.agents/skills + Agent→VS Code 用户级
+```
+
+两种模式可共存；工程内 `.github/`（工作区级）优先生效。
 
 > 需要 VS Code + GitHub Copilot（Agent 模式）。也兼容 Claude Code / Codex / Cursor（见 FAQ）。
 
