@@ -11,7 +11,7 @@
 
 ```bash
 # 1. 下载
-git clone https://github.com/<你>/flutter-dev-kit.git && cd flutter-dev-kit
+git clone https://github.com/chiguoqiang/flutter-dev-kit.git && cd flutter-dev-kit
 
 # 2. 安装（注册 Skill 到 ~/.agents/skills + Agent 到 VS Code 用户级 prompts）
 ./install.sh
