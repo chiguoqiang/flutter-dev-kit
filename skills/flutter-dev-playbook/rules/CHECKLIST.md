@@ -22,6 +22,7 @@
 - [ ] 行数预算达标（L1≤50 / L2≤150 / L3≤50）
 - [ ] globs / applyTo 与当前目录结构一致
   - [ ] CI 门禁仍生效：`.github/workflows/ci.yml` 存在且最近提交有 CI 运行记录
+  - [ ] 架构一致性：`docs/architecture/architecture.md` 与实际 import 关系抽查一致（抽 3 个模块）；架构级变更均有 ADR
 ## C. 单条规则质量检查（写一条过一条）
 
 - [ ] 指令式而非描述式（"必须…/禁止…"，而非"本目录包含…"）

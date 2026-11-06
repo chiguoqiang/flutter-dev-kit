@@ -66,6 +66,8 @@ kit 目录已自动删除，工程自包含。
 读 AGENTS.md(宪法) → 读 docs/INTAKE.md+product.md(要什么)
 → 【缺材料时】先在 chat 里声明推演模式（替用户生成草稿，不是要求用户补齐），
    再生成 docs/product|api|ui 草稿并标记[推演]，todo 措辞用「推演 xx 文档草稿」
+→ 架构先行：按 PLAYBOOK-ARCHITECTURE 通道A 起草 docs/architecture/architecture.md
+   （默认四层单向依赖 + 模块依赖表 + 首批 ADR）→ 你确认后才进入模块开发
 → 拆模块清单+需求卡(docs/features/)
 → 逐模块循环（顺序固定，完成一个才进下一个）：
     接口 → PLAYBOOK-NEW-API   (model+service+test, mock 驱动)
@@ -114,6 +116,8 @@ flowchart TD
 | 业务规则/计算公式/状态流转 | **业务线** | `flutter/PLAYBOOK-BIZ-LOGIC.md` |
 | Figma 链接 / UI 稿 | **UI 线** | `flutter/PLAYBOOK-UI-PAGE.md` |
 | 只有口头/文字想法 | 先让 Agent 落成 docs 文档再归线 | `flutter/BIZ-DOC-TEMPLATE.md` |
+| 架构级变更（新层/换方案/跨模块重构） | **架构线**：先 ADR 后代码 | `flutter/PLAYBOOK-ARCHITECTURE.md` + `ADR-TEMPLATE.md` |
+| 存量项目首次接入（无架构文档） | **架构反哺**：读码生成 architecture.md 草稿 | `flutter/PLAYBOOK-ARCHITECTURE.md` 通道B |
 
 复合需求（如"新页面+新接口"）= 多线组合，Agent 会按 `model → service → state → UI → test` 统一排序。
 

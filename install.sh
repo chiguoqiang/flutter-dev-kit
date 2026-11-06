@@ -87,7 +87,7 @@ init_project() {
 
   echo "▶ 3/6 目录骨架 + 文档区…"
   mkdir -p lib/theme lib/models lib/services lib/pages lib/widgets \
-           test/models test/services test/pages docs/api docs/biz docs/ui docs/features docs/rules docs/delivery
+           test/models test/services test/pages docs/api docs/biz docs/ui docs/features docs/rules docs/delivery docs/architecture
   cp "$SKILL_DIR_SRC/rules/INTAKE.md" docs/INTAKE.md
   cat > docs/product.md <<'EOF'
 # 产品规划（把你的产品信息填到这里，然后对 Copilot 说「开始开发」）

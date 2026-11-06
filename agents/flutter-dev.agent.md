@@ -17,6 +17,9 @@ name: Flutter 规范开发
 0. 主流程总纲（两条主线：新建项目/新增业务，含用户与你的分工边界）：读
    `.github/skills/flutter-dev-playbook/rules/WORKFLOW.md`，按其阶段推进
 1. 读当前仓库根 `AGENTS.md`（宪法：命令/目录/路由表/红线）
+   - 并读 `docs/architecture/architecture.md`（若有）：架构唯一事实源——分层依赖/模块边界；
+     不存在且为存量工程 → 按 PLAYBOOK-ARCHITECTURE 通道 B 反哺草稿；改动分层/依赖方向/
+     基础设施级三方库前必须先出 ADR，未出不得动代码
    - 并检查 `docs/rules/*.md`（公司/项目自定义规范，优先级最高）：存在则先读、
      执行时以它为准，并在汇报中声明「已按项目规范执行」；同名文件覆盖 kit 默认对应层，
      库级规范（Bloc/GetX 等）见 `rules/flutter/libs/`

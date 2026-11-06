@@ -15,6 +15,7 @@
 | **C 数据模型变更** | 「题目加解析字段」 | models + 所有引用处 + test |
 | **D 纯 UI 调整** | 「按钮换色、改间距」 | widgets / pages |
 | **E 业务规则/逻辑** | 「不及格自动进错题本」 | models/services + test ——**详细流程见 `PLAYBOOK-BIZ-LOGIC.md`** |
+| **F 架构级变更** | 「加一层 repository」「换状态方案」 | 先 ADR + 更新 architecture.md ——**见 `PLAYBOOK-ARCHITECTURE.md`** |
 
 ## 第 2 步 · 建需求卡（2 min）
 
