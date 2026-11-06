@@ -35,6 +35,8 @@ argument-hint: '[场景：新工程|新需求|接口|业务|UI] 或直接描述�
 
 ## 硬纪律（所有场景通用）
 
+- 规范优先级：项目 `docs/rules/*.md` > 库级 `rules/flutter/libs/<库名>.md` > 默认 `rules/flutter/L*.md`；
+  项目存在 docs/rules 时优先执行并在汇报中声明「已按项目规范执行」（见 rules/flutter/libs/README.md）
 - 红线以当前仓库 `AGENTS.md` 为准（生成文件禁改、原生工程只读、禁擅自加依赖、禁真实密钥、禁 `!` 强解）
 - 业务歧义不猜：记「待确认」，保守默认推进，汇报时逐条标注
 - 每场景 DoD：`flutter analyze` 零 error + `flutter test` 全绿 + format + 红线自查

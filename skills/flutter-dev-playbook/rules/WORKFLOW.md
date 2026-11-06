@@ -50,11 +50,11 @@ kit 目录已自动删除，工程自包含。
 
 ### A-4 喂材料（[你]，材料的给法见 `INTAKE.md`）
 
-| 材料 | 放哪/怎么给 | 可缺省？ |
-|---|---|---|
-| 产品规划 | 填 `docs/product.md` 模板 | ❌ 必需（缺则 Agent 出 MVP 草案找你确认一次） |
-| 接口文档 | Apifox 分享 / OpenAPI / 后端仓库，直接发给 Agent | ✅ 缺则 mock 先行 |
-| Figma | 贴链接（带 node-id 最佳），直接发给 Agent | ✅ 缺则 UI 基线生成 |
+| 材料 | 放哪/怎么给 | 可缺省？ | 缺省时 Agent 的行为（必须先声明） |
+|---|---|---|---|
+| 产品规划 | 填 `docs/product.md` 模板 | ⚠️ 半必需 | **先停下来**：Agent 出 MVP 草案找你确认一次后才开工 |
+| 接口文档 | Apifox 分享 / OpenAPI / 后端仓库，直接发给 Agent | ✅ | Agent **主动声明**「进入推演模式：我替你生成 docs/api 草稿（标记[推演]），供你确认/替换，不要求你现在补齐」后再推进 |
+| Figma | 贴链接（带 node-id 最佳），直接发给 Agent | ✅ | 同上：声明「UI 按基线生成，后续可无缝替换为 Figma 实现」 |
 
 ### A-5 发令（[你]，一句话）
 
@@ -64,13 +64,15 @@ kit 目录已自动删除，工程自包含。
 
 ```text
 读 AGENTS.md(宪法) → 读 docs/INTAKE.md+product.md(要什么)
+→ 【缺材料时】先在 chat 里声明推演模式（替用户生成草稿，不是要求用户补齐），
+   再生成 docs/product|api|ui 草稿并标记[推演]，todo 措辞用「推演 xx 文档草稿」
 → 拆模块清单+需求卡(docs/features/)
 → 逐模块循环（顺序固定，完成一个才进下一个）：
     接口 → PLAYBOOK-NEW-API   (model+service+test, mock 驱动)
     业务 → PLAYBOOK-BIZ-LOGIC (规则表/状态机 → 逐条测试)
     页面 → PLAYBOOK-UI-PAGE   (Figma/基线 → 四态+事件接线)
     每模块 DoD: analyze 零 error + test 全绿 + format + 红线自查
-→ 一次性汇报
+→ 按交付模板生成 docs/delivery/ 交付报告 → 一次性汇报
 ```
 
 ### A-7 验收（[你]，只看一页汇报）
@@ -141,9 +143,10 @@ flowchart TD
 
 ### B-5 验收与提交
 
-- [你] 过对应线的 review 清单（接口线：字段可空性逐字段核对；UI 线：四态/还原度走查；业务线：规则表逐行有测试）
+- [Agent] 按模板生成交付报告 `docs/delivery/<YYYYMMDD>-<模块>.md`（实现/检查/建议三段，模板见 `flutter/DELIVERY-TEMPLATE.md`）
+- [你] 只审报告：实现清单 → 检查清单（机器验证 + 线 review + 冒烟）→ **待确认决策★** → 建议
 - [你] `flutter run` 冒烟新功能
-- [Agent] DoD 全绿后提交：Conventional Commits，**文档与代码同一提交/PR**
+- [Agent] DoD 全绿后提交：Conventional Commits，**报告、文档与代码同一提交/PR**
 - [机器] 推送后 CI 自动验证（analyze/format/test）；红叉由 Agent 看日志修复后重推，绿勾才算交付闭环
 - 后续迭代回到 B-1
 

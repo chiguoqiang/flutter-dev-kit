@@ -17,10 +17,16 @@ name: Flutter 规范开发
 0. 主流程总纲（两条主线：新建项目/新增业务，含用户与你的分工边界）：读
    `.github/skills/flutter-dev-playbook/rules/WORKFLOW.md`，按其阶段推进
 1. 读当前仓库根 `AGENTS.md`（宪法：命令/目录/路由表/红线）
+   - 并检查 `docs/rules/*.md`（公司/项目自定义规范，优先级最高）：存在则先读、
+     执行时以它为准，并在汇报中声明「已按项目规范执行」；同名文件覆盖 kit 默认对应层，
+     库级规范（Bloc/GetX 等）见 `rules/flutter/libs/`
    - 不存在且用户要新建工程 → 按 `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-PROJECT.md` 执行（选型先问用户）
 2. 读 `docs/INTAKE.md`（若有）：核对产品规划 / 接口文档 / Figma 材料是否齐
    - 齐 → 整理入 `docs/product.md`、`docs/api/`、`docs/biz/`、`docs/ui/` 并在 AGENTS.md 路由表登记
-   - 不齐 → 缺省降级（无 API→mock 先行；无 Figma→UI 基线通道；无产品文档→出 MVP 草案请用户确认一次）
+   - **不齐 → 必须先在 chat 里向用户声明**：「进入推演模式：以下文档由我替你生成草稿
+     （标记[推演]），供你确认或用真实材料替换，不要求你现在补齐」。**禁止**把「补齐 docs」
+     表述成对用户的要求，也不得静默推演。todo 措辞用「推演 xx 文档草稿」
+   - 缺产品规划 → 出 MVP 草案请用户确认一次后再开工
 3. 任务分派到对应 Playbook：新工程→NEW-PROJECT；新需求→NEW-FEATURE 归类；
    接口→NEW-API；业务规则→BIZ-LOGIC；Figma/UI→UI-PAGE
    （Figma 经 MCP 按 node-id 单页拉取，token 映射先行）
@@ -36,9 +42,12 @@ name: Flutter 规范开发
 - Figma 的 SVG 需要 flutter_svg（新增依赖）时，必须先征求用户同意
 - 完成一个模块才进入下一个；中途不需要用户操作
 
-## 输出格式（最终一次性汇报）
+## 输出格式（最终一次性汇报，底稿=交付报告模板）
 
-1. **交付清单**：新增/修改的文件分组列出（models/services/pages/widgets/test/docs）
-2. **验证结果**：analyze / test / format 实际输出结论；若已推送，附 CI 运行结果（绿勾截图或链接）
-3. **待确认决策**：所有假设与保守默认，逐条（这是用户唯一必审的部分）
-4. **遗留项**：真实联调、资源替换、后续建议
+按 `rules/flutter/DELIVERY-TEMPLATE.md` 生成 `docs/delivery/<YYYYMMDD>-<模块>.md`，
+chat 汇报用其精简版：
+
+1. **实现**：文件变更按层分组 + 关键设计决策（3~5 条）
+2. **检查**：DoD 机器验证表（analyze/test/format/红线/CI，附 CI 链接）+ 线 review 勾选 + 冒烟结果
+3. **待确认决策** ★：所有假设与保守默认，逐条（用户唯一必审）
+4. **建议**：风险/遗留/后续建议（标注建议非必须）
