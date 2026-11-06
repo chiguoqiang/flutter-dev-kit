@@ -1,7 +1,11 @@
-# Flutter Dev Kit · AI 规范开发体系（三级 Rules + AGENTS.md）
+# Flutter Dev Kit · 文档驱动的 AI Coding 全流程体系
 
-一套可安装的 AI Coding 规则体系：让 GitHub Copilot（以及 Claude Code / Codex / Cursor）
-在任何 Flutter 项目里**按同一套规范自主开发**——新建工程、对接接口、落地业务逻辑、Figma 转页面。
+> Spec → Code → Delivery：三级规则 × 六大 Playbook × 架构/选型事实源 × CI 门禁 × Skill/Agent 随仓库分发
+
+一套可安装的 AI Coding 工作流体系：让 GitHub Copilot（以及 Claude Code / Codex / Cursor）
+把你的**产品文档变成可验收的交付**——规范打底（AGENTS.md + L3）、架构与选型先行
+（architecture.md / tech-stack.yaml）、按 Playbook 逐模块实现（model→service→state→UI→test）、
+CI 门禁机器验收、交付报告三段式汇报。新建工程、存量规范化、对接接口、业务规则、Figma 转页面全覆盖。
 
 你只需要做两件事：**安装一次**，然后**把产品文档放进来，对 Agent 说"开始开发"**。
 
