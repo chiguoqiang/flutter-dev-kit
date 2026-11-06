@@ -1,6 +1,6 @@
 # __APP_TITLE__ — __APP_DESC__
 
-> Flutter (Dart 3, 空安全) · 状态管理：Riverpod · 网络：dio · 路由：go_router ·
+> Flutter (Dart 3, 空安全) · **架构模式：MVVM** · 状态管理：Riverpod · 网络：dio · 路由：go_router ·
 > 序列化：json_serializable · mock：mocktail · import 风格：package: 导入 · 文案：中文写死 · 包管理：pub
 
 ## 常用命令（已验证）
@@ -42,6 +42,7 @@ flutter build ipa               # iOS 构建（需签名）
 |---|---|---|
 | 任何新需求 | `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-FEATURE.md` | 需求卡 + 按层补齐流程 |
 | 架构/分层/依赖方向 | `docs/architecture/architecture.md`（无则按 PLAYBOOK-ARCHITECTURE 反哺） | 唯一事实源；改分层先 ADR |
+| 基础设施封装（网络/路由/存储/日志/主题） | `.github/skills/flutter-dev-playbook/rules/flutter/INFRA-STANDARD.md` | 唯一封装入口与禁止事项 |
 | 接口对接 / 新增接口 | `docs/api/<域名>.md`（无则先按 `API-DOC-TEMPLATE.md` 建立） | 契约、字段可空性与坑 |
 | 业务规则（绩效/任务/客户域） | `docs/biz/<域名>.md`（无则先按 `BIZ-DOC-TEMPLATE.md` 建立） | 规则表、状态机、边界算例 |
 | 页面 UI 实现 | `docs/ui/<页面名>.md`（无则先按 `UI-DOC-TEMPLATE.md` 建立） | 四态、事件表、文案 |
@@ -52,8 +53,24 @@ flutter build ipa               # iOS 构建（需签名）
 
 ## 约定
 
-- 命名：页面 `*_page.dart`、组件 `*_widget.dart`、服务 `*_api.dart` / `*_store.dart`、
-  Provider `xxxProvider`、路由名用小驼峰字符串
+### 命名规范（文件与标识符）
+
+| 对象 | 规范 | 示例 |
+|---|---|---|
+| 页面文件/类 | `*_page.dart` / `XxxPage` | `customer_search_page.dart` |
+| 通用组件 | `*_widget.dart`（或名词）/ `XxxWidget`，复用≥2 处才入 widgets/ | `tag_chip.dart` |
+| ViewModel（状态层） | Riverpod：`*_providers.dart`（`xxxProvider`）；其他方案：`*_view_model.dart` / `XxxViewModel` | `customer_providers.dart` |
+| 网络服务 | `*_api.dart` / `XxxApi`，每后端域一文件 | `customer_api.dart` |
+| 本地存储 | `*_store.dart` / `XxxStore` | `user_store.dart` |
+| 模型 | 名词单数 `.dart`；生成物 `*.g.dart` 禁改 | `customer.dart` |
+| 路由名/路径 | 常量类 `Routes` 集中；名小驼峰，path 用 `/xxx/:id` | `Routes.customerDetail` |
+| 测试 | 镜像 lib 路径 + `_test.dart`，用例名完整句 | `customer_api_test.dart` |
+| 变量/函数/类 | 变量函数 lowerCamelCase；类/枚举 UpperCamelCase；常量与枚举值 lowerCamelCase；包名/文件 snake_case | — |
+| 布尔 | `is/has/can/should` 前缀 | `isLoading` |
+
+### 其他约定
+
+- 命名细则见上方「命名规范」表；路由常量 `Routes` 集中管理
 - import：一律 `package:shark_app/...` 绝对导入，`lib/` 内禁止相对导入
 - 状态：一律 Riverpod（写法见 `lib/AGENTS.md`）；新 Provider 放对应域文件，不放 main.dart
 - 样式：颜色/圆角/字体取自 `lib/theme/app_theme.dart` 或 `Theme.of(context)`；

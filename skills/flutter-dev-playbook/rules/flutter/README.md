@@ -13,7 +13,8 @@
 | 📐 业务逻辑（规则→代码） | [`PLAYBOOK-BIZ-LOGIC.md`](PLAYBOOK-BIZ-LOGIC.md) + [`BIZ-DOC-TEMPLATE.md`](BIZ-DOC-TEMPLATE.md)：规则表/状态机/边界算例 → 分层实现 + 逐条测试 |
 | 🎨 设计稿→页面（Figma / UI 文档） | [`PLAYBOOK-UI-PAGE.md`](PLAYBOOK-UI-PAGE.md) + [`UI-DOC-TEMPLATE.md`](UI-DOC-TEMPLATE.md)：Figma MCP 拉 token/资源 → 四态 + 事件表接线 → 还原度走查 |
 | 📦 验收交付 | [`DELIVERY-TEMPLATE.md`](DELIVERY-TEMPLATE.md)：实现/检查/建议三段交付报告 → `docs/delivery/` |
-| 🏛️ 架构：新项目设计 / 存量反哺 / ADR | [`PLAYBOOK-ARCHITECTURE.md`](PLAYBOOK-ARCHITECTURE.md) + [`ARCH-TEMPLATE.md`](ARCH-TEMPLATE.md) + [`ADR-TEMPLATE.md`](ADR-TEMPLATE.md)：架构先于代码，唯一事实源 |
+| 🏛️ 架构：新项目设计 / 存量反哺 / ADR | [`PLAYBOOK-ARCHITECTURE.md`](PLAYBOOK-ARCHITECTURE.md) + [`ARCH-TEMPLATE.md`](ARCH-TEMPLATE.md) + [`ADR-TEMPLATE.md`](ADR-TEMPLATE.md)：默认 **MVVM**，架构先于代码，唯一事实源 |
+| 🔧 基础设施封装（网络/路由/存储/日志/主题） | [`INFRA-STANDARD.md`](INFRA-STANDARD.md)：每项基础设施唯一封装入口 + 禁止清单 |
 | 🏢 公司/项目规范覆盖 & 第三方库规范 | [`libs/README.md`](libs/README.md)：默认规范可被项目 `docs/rules/` 整体替换；Bloc/GetX 等库级规范按选型加载 |
 | 🧩 已有工程补规则 | 本文下方「规则文件与去向」+「已有工程补规则 · 15 分钟」 |
 | 🔍 日常审计与调优 | [`../CHECKLIST.md`](../CHECKLIST.md) + [`../GUIDE.md`](../GUIDE.md) §7 §8 |

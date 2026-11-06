@@ -13,6 +13,8 @@
 
 ## 2. 总体架构（分层图）
 
+**架构模式：MVVM**（默认；如为其他模式须有 ADR）：View(pages/widgets) → ViewModel(*_providers) → Model(models+services)，数据流单向。
+
 ```mermaid
 flowchart TD
     UI[UI 层 lib/pages + widgets] --> ST[状态层 *_providers / lib/AGENTS.md]

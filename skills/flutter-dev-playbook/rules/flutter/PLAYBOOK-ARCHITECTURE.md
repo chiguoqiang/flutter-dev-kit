@@ -31,6 +31,16 @@
 
 ## 默认架构原则（kit 立场，项目可用 docs/rules/architecture.md 覆盖）
 
+0. **默认架构模式 = MVVM**（换 MVC/Clean/MVI 需 ADR + `docs/rules/architecture.md` 覆盖）：
+
+| MVVM | 本项目落位 | 规范 |
+|---|---|---|
+| View | `lib/pages`（*_page.dart）+ `lib/widgets` | 只做布局/四态/事件接线，禁业务规则 |
+| ViewModel | `*_providers.dart`（Riverpod）/ `*_view_model.dart` | 持状态+编排动作；禁 BuildContext/禁直连网络 |
+| Model | `lib/models`（数据+纯规则）+ `lib/services`（数据访问） | 模型层纯 Dart |
+
+  绑定方式 = Riverpod（`ref.watch` 单向数据流）；基础封装遵循 `INFRA-STANDARD.md`
+
 1. **四层单向依赖**：UI → 状态 → 服务 → 模型；反向/跨层 import 违规
 2. **模型层纯 Dart**：不 import Flutter/dio/任何 IO——保证可测性与可移植
 3. **单一事实源**：网络出口=ApiClient，路由=router.dart，主题=theme/，架构=architecture.md
