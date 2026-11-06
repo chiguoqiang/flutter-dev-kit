@@ -99,7 +99,6 @@ flutter-dev-kit/
 │       ├── GUIDE.md                    #   方法论：三级 Rules + 索引式 AGENTS.md
 │       ├── CHECKLIST.md                #   初始化/季度审计清单
 │       ├── INTAKE.md                   #   材料交接清单（文档驱动开发入口）
-│       ├── templates/                  #   通用三层规则模板（L1/L2/L3）
 │       └── flutter/                    #   Flutter 全套（L1/L2/L3 + PLAYBOOK×5）
 ├── agents/flutter-dev.agent.md         # 自定义 Agent（引用 Skill 内 rules/）
 └── preset/                             # 工程预设（AGENTS.md×6 占位符版 + 基础设施代码 + CI 门禁）
