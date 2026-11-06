@@ -47,6 +47,27 @@ cd flutter-dev-kit && ./install.sh          # Skill→~/.agents/skills + Agent�
 | 📦 已有项目规范化 | 「按 flutter-dev-playbook 规范化本项目」 | 拷规则库进 `docs/` → 生成根 AGENTS.md + 模块 L3 |
 | 📄 拿着文档直接开发 | 放入材料后说「开始开发」 | 见下 |
 
+## 装完之后，你可以调整/更新/补充什么（用户可编辑点地图）
+
+工程初始化后，**这些都是留给你的旋钮**——改完在 chat 里说对应黑话即可生效：
+
+| 你想调整什么 | 编辑哪个文件 | 然后说什么 | 生效范围 |
+|---|---|---|---|
+| **技术选型/版本**（换 bloc/getx、锁版本） | `docs/tech-stack.yaml` | 「按 tech-stack 调整」 | pubspec + AGENTS 技术栈行 + 加载对应库规范 + 迁移代码 |
+| **公司/项目规范**（编码/架构/UI 约定） | `docs/rules/*.md`（同名覆盖默认层） | 无需指令，Agent 自动优先执行 | 同名层整体以你的为准（如 `state-management.md`、`architecture.md`） |
+| **产品方向**（模块/优先级/MVP 边界） | `docs/product.md` | 「按最新 product 继续」 | 后续模块拆解与排期 |
+| **接口契约** | `docs/api/<域>.md`（真实抓包替换[推演]稿） | 「按最新 API 文档调整」 | model/service/test 重生成 |
+| **业务规则**（状态机/公式） | `docs/biz/<域>.md` | 「按最新 biz 调整」 | 规则实现+逐条测试同步 |
+| **UI 规格/Figma** | `docs/ui/<页>.md` 或直接贴 Figma 链接 | 「按最新 UI 文档调整」 | 页面四态/事件接线 |
+| **架构**（分层/依赖/加层） | `docs/architecture/architecture.md` + `adr/NNNN-*.md` | 提出变更，Agent 先出 ADR | 全项目结构与依赖规则 |
+| **红线/命令/命名** | 根 `AGENTS.md`（宪法） | 无需指令，常驻生效 | Agent 全部行为 |
+| **模块级细则** | `lib/services/AGENTS.md` 等 L3 文件 | 无需指令，就近生效 | 对应目录 |
+| **CI 门禁** | `.github/workflows/ci.yml` | —（推送自动跑） | analyze/format/test 强制 |
+| **缺文档时的推演稿** | 任何标 `[推演]` 的文档可直接改 | — | 下次实现即按改后版本 |
+
+> 原则：**事实源文件 > 口头描述**。想长期生效的调整都落到上面这些文件；
+> 一次性的口头要求适合小修，Agent 做完会建议是否回写文档。
+
 ## 文档驱动开发（第三种，最省心）
 
 把以下材料放进项目 `docs/`（清单见 `docs/INTAKE.md`，init 时自动生成）：
