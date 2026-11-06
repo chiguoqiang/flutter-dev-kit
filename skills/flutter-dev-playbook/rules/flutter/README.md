@@ -8,6 +8,7 @@
 | 你的场景 | 入口 |
 |---|---|
 | 🆕 新建一个 Flutter 工程 | [`PLAYBOOK-NEW-PROJECT.md`](PLAYBOOK-NEW-PROJECT.md)：选型 → 骨架 → 基础设施 → 规则落地 → 验证（约 60 min） |
+| ⚙️ 技术选型定制 | 工程内 `docs/tech-stack.yaml`（init 自动生成，唯一事实源）：改选型/版本 → 告知 Agent「按 tech-stack 调整」 |
 | ✨ 新增一个需求 | [`PLAYBOOK-NEW-FEATURE.md`](PLAYBOOK-NEW-FEATURE.md) + [`FEATURE-CARD.md`](FEATURE-CARD.md)：归类 → 需求卡 → 按层补齐 → DoD → 提交 |
 | 🔌 对接新接口（文档→代码） | [`PLAYBOOK-NEW-API.md`](PLAYBOOK-NEW-API.md) + [`API-DOC-TEMPLATE.md`](API-DOC-TEMPLATE.md)：文档落位 → 路由登记 → Agent 生成 model/service/test → review |
 | 📐 业务逻辑（规则→代码） | [`PLAYBOOK-BIZ-LOGIC.md`](PLAYBOOK-BIZ-LOGIC.md) + [`BIZ-DOC-TEMPLATE.md`](BIZ-DOC-TEMPLATE.md)：规则表/状态机/边界算例 → 分层实现 + 逐条测试 |

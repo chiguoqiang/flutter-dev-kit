@@ -41,6 +41,7 @@ flutter build ipa               # iOS 构建（需签名）
 | 触碰区域 | 先读 | 一句话原因 |
 |---|---|---|
 | 任何新需求 | `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-FEATURE.md` | 需求卡 + 按层补齐流程 |
+| 技术选型/版本/依赖调整 | `docs/tech-stack.yaml`（唯一事实源；改后告知 Agent「按 tech-stack 调整」） | 选型变更需同步 AGENTS/pubspec/库规范 |
 | 架构/分层/依赖方向 | `docs/architecture/architecture.md`（无则按 PLAYBOOK-ARCHITECTURE 反哺） | 唯一事实源；改分层先 ADR |
 | 基础设施封装（网络/路由/存储/日志/主题） | `.github/skills/flutter-dev-playbook/rules/flutter/INFRA-STANDARD.md` | 唯一封装入口与禁止事项 |
 | 接口对接 / 新增接口 | `docs/api/<域名>.md`（无则先按 `API-DOC-TEMPLATE.md` 建立） | 契约、字段可空性与坑 |

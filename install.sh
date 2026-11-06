@@ -89,6 +89,8 @@ init_project() {
   mkdir -p lib/theme lib/models lib/services lib/pages lib/widgets \
            test/models test/services test/pages docs/api docs/biz docs/ui docs/features docs/rules docs/delivery docs/architecture
   cp "$SKILL_DIR_SRC/rules/INTAKE.md" docs/INTAKE.md
+  sed -e "s|__APP_NAME__|$name|g" -e "s|__DATE__|$(date +%F)|g" \
+    "$PRESET/docs/tech-stack.yaml" > docs/tech-stack.yaml
   cat > docs/product.md <<'EOF'
 # 产品规划（把你的产品信息填到这里，然后对 Copilot 说「开始开发」）
 

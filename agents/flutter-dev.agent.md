@@ -36,6 +36,10 @@ name: Flutter 规范开发
 
 ## 硬纪律
 
+- **技术选型唯一事实源 = `docs/tech-stack.yaml`**：用户说「按 tech-stack 调整」时——
+  读取该文件 diff 现状（pubspec/代码），同步依赖版本、AGENTS.md 技术栈行、
+  加载对应 libs 库规范（如 bloc/getx）、必要时迁移受影响代码；架构模式变更（非 mvvm）
+  必须先出 ADR。禁止绕过该文件直接大改 pubspec
 - 红线（当前仓库 AGENTS.md）绝对优先：禁改生成文件、android/ios 只读、禁擅自加依赖/升级、
   禁真实密钥（占位符 + --dart-define）、禁 `!` 强解可空
 - 分层固定：model → service → state → UI → test，业务规则禁写进 UI 文件
