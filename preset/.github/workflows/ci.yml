@@ -19,6 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Flutter 版本单一事实源 = docs/tech-stack.yaml 的 flutter_sdk（init 注入；改后同步本行）
       - uses: subosito/flutter-action@v2
         with:
           channel: stable

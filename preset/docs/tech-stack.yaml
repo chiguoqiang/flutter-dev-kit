@@ -11,6 +11,8 @@ meta:
   app_name: __APP_NAME__          # 项目名（自动填）
   created_at: __DATE__            # init 日期（自动填）
 
+flutter_sdk: stable               # stable(默认,跟最新,零维护) | 具体版本如 3.24.5（pin：本机与 CI 可复现；init 自动同步进 ci.yml）
+
 architecture:
   pattern: mvvm                   # mvvm | mvc | clean | mvi（非 mvvm 需 ADR）
   binding: riverpod               # MVVM 绑定：riverpod（默认）

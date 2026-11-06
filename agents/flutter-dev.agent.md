@@ -28,6 +28,8 @@ name: Flutter 规范开发
    - **时效铁律**：每个模块/需求**开工前必须重新读该文件当前内容**（用户可能刚改过）；
      实现一律以刚读到的最新版为准。发现文件与 pubspec/代码不一致 → 先向用户声明差异，
      以 tech-stack 为目标同步（除非用户明说以现状为准则先更新文件），禁止默默按旧选型继续
+   - `flutter_sdk` 变更时必须同步 `.github/workflows/ci.yml`（stable/beta → channel；
+     具体版本号 → flutter-version），保证本机与 CI 同版
    - 并检查 `docs/rules/*.md`（公司/项目自定义规范，优先级最高）：存在则先读、
      执行时以它为准，并在汇报中声明「已按项目规范执行」；同名文件覆盖 kit 默认对应层，
      库级规范（Bloc/GetX 等）见 `rules/flutter/libs/`

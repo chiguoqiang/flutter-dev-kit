@@ -1,6 +1,6 @@
 # __APP_TITLE__ — __APP_DESC__
 
-> Flutter (Dart 3, 空安全) · **架构模式：MVVM** · 状态管理：Riverpod · 网络：dio · 路由：go_router ·
+> Flutter SDK：`docs/tech-stack.yaml` 的 `flutter_sdk`（CI 同源）· Dart 3 空安全 · **架构模式：MVVM** · 状态管理：Riverpod · 网络：dio · 路由：go_router ·
 > 序列化：json_serializable · mock：mocktail · import 风格：package: 导入 · 文案：中文写死 · 包管理：pub
 
 ## 常用命令（已验证）

@@ -79,6 +79,7 @@ inject_project() {
       echo "  app_name: $(basename "$proj")"
       echo "  created_at: $(date +%F)"
       echo ""
+      echo "flutter_sdk: unknown       # 待 Agent 回填：本机 flutter --version（写 stable 或具体版本号，同步 ci.yml）"
       echo "architecture:"
       echo "  pattern: unknown   # 待 Agent 从代码识别（mvvm/mvc/clean/mvi）"
       echo "  binding: unknown"
@@ -127,10 +128,23 @@ init_project() {
   echo "▶ 1/6 flutter create（org=com.example，可稍后改）…"
   flutter create --org com.example --project-name "$name" --platforms android,ios . >/dev/null
 
-  echo "▶ 2/6 安装默认选型依赖（Riverpod + dio + go_router + json_serializable + mocktail）…"
-  flutter pub add dio go_router flutter_riverpod json_annotation >/dev/null 2>&1 \
-    && flutter pub add --dev json_serializable build_runner mocktail >/dev/null 2>&1 \
-    || echo "   ⚠️ 依赖安装失败（网络?），请稍后手动: flutter pub add dio go_router flutter_riverpod json_annotation"
+  echo "▶ 2/6 安装选型依赖（版本约束来自 tech-stack.yaml）…"
+  extract_deps() {  # $1=pubspec 段名 → 输出 "pkg:ver pkg:ver ..."
+    awk -v sect="$1" '
+      $0 ~ "^" sect ":" { in_s = 1; next }
+      in_s && /^[a-zA-Z]/ { in_s = 0 }
+      in_s && /^  [a-zA-Z_][a-zA-Z0-9_]*:/ {
+        k = $1; sub(":$", "", k)
+        v = $2; gsub(/"/, "", v)
+        printf "%s:%s ", k, v
+      }' "$PRESET/docs/tech-stack.yaml"
+  }
+  dep_args="$(extract_deps dependencies)"
+  dev_args="$(extract_deps dev_dependencies)"
+  # shellcheck disable=SC2086
+  flutter pub add $dep_args >/dev/null 2>&1 \
+    && flutter pub add --dev $dev_args >/dev/null 2>&1 \
+    || echo "   ⚠️ 依赖安装失败（网络?），稍后重试: flutter pub add $dep_args"
 
   echo "▶ 3/6 目录骨架 + 文档区…"
   mkdir -p lib/theme lib/models lib/services lib/pages lib/widgets \
@@ -163,6 +177,14 @@ EOF
   cp "$PRESET/.github/copilot-instructions.md" .github/copilot-instructions.md
   mkdir -p .github/workflows
   cp "$PRESET/.github/workflows/ci.yml" .github/workflows/ci.yml
+  # 按 tech-stack 的 flutter_sdk 注入 CI 版本（channel 类原样；具体版本 pin 为 flutter-version）
+  sdk_ver="$(awk -F': *' '/^flutter_sdk:/{gsub(/[\" ]/, \"\", \$2); print \$2; exit}' \"$PRESET/docs/tech-stack.yaml\")"
+  case "$sdk_ver" in
+    ""|stable|beta|master)
+      sed -i '' "s/^          channel: .*/          channel: ${sdk_ver:-stable}/" .github/workflows/ci.yml ;;
+    *)
+      sed -i '' "s/^          channel: .*/          flutter-version: \"$sdk_ver\"/" .github/workflows/ci.yml ;;
+  esac
   sed -e "s|__APP_TITLE__|$title|g" -e "s|__APP_DESC__|$desc|g" "$PRESET/AGENTS.md" > AGENTS.md
   cp "$PRESET/CLAUDE.md" CLAUDE.md
   mkdir -p .cursor/rules && cp "$PRESET/.cursor/rules/00-agents.mdc" .cursor/rules/00-agents.mdc
