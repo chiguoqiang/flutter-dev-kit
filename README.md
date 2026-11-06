@@ -77,7 +77,7 @@ flutter-dev-kit/
 │       ├── templates/                  #   通用三层规则模板（L1/L2/L3）
 │       └── flutter/                    #   Flutter 全套（L1/L2/L3 + PLAYBOOK×5）
 ├── agents/flutter-dev.agent.md         # 自定义 Agent（引用 Skill 内 rules/）
-└── preset/                             # 工程预设（AGENTS.md×6 占位符版 + 基础设施代码）
+└── preset/                             # 工程预设（AGENTS.md×6 占位符版 + 基础设施代码 + CI 门禁）
 ```
 
 注入工程后的形态（全部随仓库 Git 分发，同事 clone 零配置）：
@@ -108,6 +108,9 @@ flutter-dev-kit/
   `.github/skills/flutter-dev-playbook/`，随仓库推送，同事 clone 零配置。
 - **Claude Code / Codex / Cursor？** 体系生成的每个项目自带 `CLAUDE.md`(@AGENTS.md) 与
   `.cursor/rules`、`.github/copilot-instructions.md` 适配薄层，见 GUIDE §5。
+- **CI 门禁？** init 生成的工程自带 `.github/workflows/ci.yml`（analyze + format 检查 + test），
+  推送 GitHub 后自动生效；建议 Settings → Branches 设为 required check。未推送的本地项目无 CI，
+  靠本地 DoD 兑底。
 - **更新版本？** 上游 `git pull` 后对老工程重跑 `--project`（或删除工程内 skill 目录后重跑）。
 - **卸载？** 删除 `~/.agents/skills/flutter-dev-playbook/` 与 VSCode prompts 下的
   `flutter-dev.agent.md`。

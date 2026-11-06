@@ -76,7 +76,7 @@ kit 目录已自动删除，工程自包含。
 ### A-7 验收（[你]，只看一页汇报）
 
 1. **交付清单**：改了哪些文件（分 models/services/pages/widgets/test/docs）
-2. **验证结果**：analyze/test 实际输出
+2. **验证结果**：本地 analyze/test 输出；已推 GitHub 则以 **CI 绿勾**为准（机器验证，不信自述）
 3. **待确认决策** ★唯一必审：Agent 的所有假设与保守默认，逐条拍板
 4. **遗留项**：真实联调、资源替换
 5. `flutter run` 手动冒烟主流程；不满意直接在 chat 里继续提要求
@@ -144,6 +144,7 @@ flowchart TD
 - [你] 过对应线的 review 清单（接口线：字段可空性逐字段核对；UI 线：四态/还原度走查；业务线：规则表逐行有测试）
 - [你] `flutter run` 冒烟新功能
 - [Agent] DoD 全绿后提交：Conventional Commits，**文档与代码同一提交/PR**
+- [机器] 推送后 CI 自动验证（analyze/format/test）；红叉由 Agent 看日志修复后重推，绿勾才算交付闭环
 - 后续迭代回到 B-1
 
 ---
@@ -158,4 +159,4 @@ flowchart TD
 | 你的验收 | 一页汇报 + 待确认拍板 + 冒烟 | 对应线 review 清单 + 冒烟 |
 | 产出物 | 完整可开发工程(Git 基线) | 垂直切片(model~test)+文档同步 |
 
-**贯穿两条主线的铁律**：真实密钥永不入文档/代码（`--dart-define` 注入）；业务歧义 Agent 不猜、记「待确认」；每模块必过 DoD（analyze 零 error + test 全绿）；文档与代码同 PR 演进。
+**贯穿两条主线的铁律**：真实密钥永不入文档/代码（`--dart-define` 注入）；业务歧义 Agent 不猜、记「待确认」；每模块必过 DoD（analyze 零 error + test 全绿，推送后以 CI 绿勾为机器证明）；文档与代码同 PR 演进。

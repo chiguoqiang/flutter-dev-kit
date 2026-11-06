@@ -1,0 +1,41 @@
+# CI 门禁（flutter-dev-kit 体系第③强制层）
+# DoD 机器化：analyze 零 error + format 已跑 + test 全绿，任一失败即红叉
+# 说明：分支保护(将 CI 设为 required check)需在 GitHub 仓库 Settings→Branches 手动开启
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true # 同一 PR 连续 push 只跑最新，省额度
+
+jobs:
+  check:
+    runs-on: ubuntu-latest # 1x 计价；勿用 macOS(10x) 跑单测
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: 安装依赖
+        run: flutter pub get
+
+      - name: 静态检查（DoD：零 error；warning 不阻断）
+        run: flutter analyze
+
+      - name: 格式检查（DoD：dart format 已跑过）
+        run: dart format --set-exit-if-changed lib test
+
+      - name: 单元测试（DoD：全绿）
+        run: flutter test
+
+      # 可选扩展（需要时取消注释）：
+      # - name: 密钥扫描
+      #   uses: gitleaks/gitleaks-action@v2

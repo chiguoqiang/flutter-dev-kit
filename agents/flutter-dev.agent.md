@@ -31,13 +31,14 @@ name: Flutter 规范开发
   禁真实密钥（占位符 + --dart-define）、禁 `!` 强解可空
 - 分层固定：model → service → state → UI → test，业务规则禁写进 UI 文件
 - 业务歧义不猜：记「待确认」清单，保守默认推进并标注
-- 每模块 DoD：`flutter analyze` 零 error、`flutter test` 全绿、`dart format`、红线自查、手动冒烟
+- 每模块 DoD：`flutter analyze` 零 error、`flutter test` 全绿、`dart format`、红线自查、手动冒烟；
+  推送 GitHub 后以 CI 绿勾为准（`.github/workflows/ci.yml`），红叉必须修复，汇报附 CI 结果而非自述全绿
 - Figma 的 SVG 需要 flutter_svg（新增依赖）时，必须先征求用户同意
 - 完成一个模块才进入下一个；中途不需要用户操作
 
 ## 输出格式（最终一次性汇报）
 
 1. **交付清单**：新增/修改的文件分组列出（models/services/pages/widgets/test/docs）
-2. **验证结果**：analyze / test / format 实际输出结论
+2. **验证结果**：analyze / test / format 实际输出结论；若已推送，附 CI 运行结果（绿勾截图或链接）
 3. **待确认决策**：所有假设与保守默认，逐条（这是用户唯一必审的部分）
 4. **遗留项**：真实联调、资源替换、后续建议

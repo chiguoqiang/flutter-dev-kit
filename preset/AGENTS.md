@@ -70,3 +70,9 @@ flutter build ipa               # iOS 构建（需签名）
   （首版依赖：dio / go_router / flutter_riverpod / json_annotation + dev: json_serializable / build_runner / mocktail）
 - 禁止提交真实密钥；`lib/config.dart` 只允许占位符，真实值走 `--dart-define`
 - 禁止用 `!` 强解可空来"消除"编译错误（有非空证据时须注释说明）
+
+## CI 门禁（已内置 `.github/workflows/ci.yml`）
+
+- push / PR 自动跑：`flutter analyze`（零 error）→ `dart format --set-exit-if-changed lib test` → `flutter test`（全绿）
+- CI 绿勾是 DoD 的机器证明，红叉未修复不算完成；Agent 汇报必须附 CI 结果而非自述全绿
+- 推送到 GitHub 后自动生效；建议 Settings → Branches 将 `CI` 设为 required check（红叉 PR 无法合并）

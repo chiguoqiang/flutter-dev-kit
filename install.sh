@@ -112,6 +112,8 @@ EOF
   cp -R "$SKILL_DIR_SRC" .github/skills/flutter-dev-playbook
   cp "$AGENT_SRC" .github/agents/flutter-dev.agent.md
   cp "$PRESET/.github/copilot-instructions.md" .github/copilot-instructions.md
+  mkdir -p .github/workflows
+  cp "$PRESET/.github/workflows/ci.yml" .github/workflows/ci.yml
   sed -e "s|__APP_TITLE__|$title|g" -e "s|__APP_DESC__|$desc|g" "$PRESET/AGENTS.md" > AGENTS.md
   cp "$PRESET/CLAUDE.md" CLAUDE.md
   mkdir -p .cursor/rules && cp "$PRESET/.cursor/rules/00-agents.mdc" .cursor/rules/00-agents.mdc
@@ -123,6 +125,7 @@ EOF
   cp "$PRESET/lib/pages/AGENTS.md" "$PRESET/lib/pages/home_page.dart" lib/pages/
   cp "$PRESET/test/AGENTS.md" test/AGENTS.md
   sed "s|__APP_NAME__|$name|g" "$PRESET/test/widget_test.dart" > test/widget_test.dart
+  dart format lib test >/dev/null 2>&1 || true   # 规范化 + 保障 CI format 检查首绿
 
   echo "▶ 5/6 清理脚手架…"
   local kit_gone=0
