@@ -172,6 +172,7 @@ EOF
   cp "$PRESET/lib/services/AGENTS.md" "$PRESET/lib/services/api_client.dart" lib/services/
   cp "$PRESET/lib/models/AGENTS.md" lib/models/
   cp "$PRESET/lib/pages/AGENTS.md" "$PRESET/lib/pages/home_page.dart" lib/pages/
+  cp "$PRESET/lib/widgets/AGENTS.md" lib/widgets/
   cp "$PRESET/test/AGENTS.md" test/AGENTS.md
   sed "s|__APP_NAME__|$name|g" "$PRESET/test/widget_test.dart" > test/widget_test.dart
   dart format lib test >/dev/null 2>&1 || true   # 规范化 + 保障 CI format 检查首绿
@@ -219,7 +220,8 @@ case "${1:-}" in
   --personal)
     install_skill; install_agent
     echo
-    echo "下一步：重启 VS Code 后，对 Copilot 说「新建一个 Flutter 工程，按 flutter-dev-playbook 规范」" ;;
+    echo "下一步：重启 VS Code 后，对 Copilot 说「新建一个 Flutter 工程，按 flutter-dev-playbook 规范」"
+    echo "可选：把 rules/flutter/L1-flutter-global.md 追加到 ~/.claude/CLAUDE.md（个人全局习惯，跨项目生效）" ;;
   --project)
     [ $# -ge 2 ] || { echo "用法: ./install.sh --project <工程路径>"; exit 1; }
     inject_project "$2" ;;

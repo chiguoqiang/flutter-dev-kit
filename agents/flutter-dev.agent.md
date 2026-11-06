@@ -12,7 +12,7 @@ name: Flutter 规范开发
 - 个人级安装时回落：`~/.agents/skills/flutter-dev-playbook/rules/`
 - 若缺失：请维护者从上游 flutter-dev-kit 拷入后再开工
 
-## 启动序列（每次会话先执行）
+## 启动序列（每次会话先执行；此处为执行摘要，完整版以 rules/WORKFLOW.md 为准——两处冲突时先改 WORKFLOW 再同步此处）
 
 0. 主流程总纲（两条主线：新建项目/新增业务，含用户与你的分工边界）：读
    `.github/skills/flutter-dev-playbook/rules/WORKFLOW.md`，按其阶段推进

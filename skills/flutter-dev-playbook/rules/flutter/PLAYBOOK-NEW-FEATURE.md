@@ -19,7 +19,7 @@
 
 ## 第 2 步 · 建需求卡（2 min）
 
-复制 `FEATURE-CARD.md` → `docs/features/<YYYYMMDD>-<slug>.md`，勾选要补齐的层。
+复制 `FEATURE-CARD-TEMPLATE.md` → `docs/features/<YYYYMMDD>-<slug>.md`，勾选要补齐的层。
 
 > 与 Agent 协作时，**把需求卡作为任务描述发给它**——它就拿到了完整上下文
 > （要动哪些层、每层守什么规则、DoD 是什么）。

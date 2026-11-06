@@ -1,30 +1,23 @@
-# AI Coding 规则工程 · 三级 Rules + 索引式 AGENTS.md（Flutter 专用）
+# 规则库索引（Flutter 专用）
 
-一套 **Flutter 专用**的 Agent 规则体系：
-让 Claude Code、Codex、Cursor、GitHub Copilot 在同一仓库行为一致、稳定、可维护。
-方法论（三级分层/索引式/工具适配）可迁移，但本 kit 只维护 Flutter 落地物。
+> 本文件只做索引，不重复导航——场景入口看 [`flutter/README.md`](flutter/README.md)，
+> 全流程图看 [`WORKFLOW.md`](WORKFLOW.md)，安装与可调旋钮看 kit 根 `README.md`。
 
-## 文件清单
+## 一页地图
 
-| 文件 | 用途 |
+| 你要找 | 去 |
 |---|---|
-| `WORKFLOW.md` | ★ **AI Coding 完整流程总纲**：新建项目 / 新增业务两条主线，逐步标注 [你]/[Agent] 分工 |
-| `GUIDE.md` | 完整方法论：架构 / 索引设计 / 工具适配 / 落地 SOP / 维护机制 / 调优 / 反模式 / 度量 |
-| `CHECKLIST.md` | 初始化清单、季度审计清单、单条规则质量检查、失效排查 |
-| `flutter/` | **Flutter 全套**：L1/L2/L3×5 + 库级 libs/ + Playbook×6 + 模板×6 + INFRA/事实源约定 |
-
-## 快速开始
-
-1. **新建 Flutter 工程** → `flutter/PLAYBOOK-NEW-PROJECT.md`
-2. **Flutter 新增需求** → `flutter/PLAYBOOK-NEW-FEATURE.md`（配 `flutter/FEATURE-CARD.md` 需求卡）
-3. **对接新接口** → `flutter/PLAYBOOK-NEW-API.md` + `flutter/API-DOC-TEMPLATE.md`（文档标准：接口名/方式/参数/Header/响应示例）
-4. **业务逻辑落地** → `flutter/PLAYBOOK-BIZ-LOGIC.md` + `flutter/BIZ-DOC-TEMPLATE.md`（规则表/状态机/边界算例，一行规则一条测试）
-5. **设计稿转页面** → `flutter/PLAYBOOK-UI-PAGE.md` + `flutter/UI-DOC-TEMPLATE.md`（支持 Figma MCP 直连：token 映射 → 四态 + 事件接线）
-6. 老工程补规范 → `flutter/README.md`「已有工程补规则」或 `install.sh --project` 注入
-7. 之后每季度过一遍 `CHECKLIST.md` 的 B 部分
+| AI Coding 全流程（两条主线+流程图） | `WORKFLOW.md` |
+| 按场景选 Playbook（新工程/需求/接口/业务/UI/架构） | `flutter/README.md` |
+| 方法论（三级 Rules/索引式 AGENTS/多工具适配/调优/反模式） | `GUIDE.md` |
+| 初始化与季度审计清单 | `CHECKLIST.md` |
+| 材料交接（product/api/figma 放哪、缺省降级） | `INTAKE.md` |
+| 三层规则本体（L1 全局/L2 项目/L3×5 模块 + libs 库级） | `flutter/L*.md`、`flutter/libs/` |
+| 输入/输出模板（API/BIZ/UI/ARCH/ADR/DELIVERY/需求卡） | `flutter/*-TEMPLATE.md` |
+| 基础设施封装（网络/路由/存储/日志/主题） | `flutter/INFRA-STANDARD.md` |
 
 ## 三条铁律（记住这个就够了）
 
-1. **越近优先**：子目录 > 仓库根 > 全局；L1 永不覆盖 L2/L3
+1. **越近优先**：项目 `docs/rules/` > `libs/` > 默认 L*；子目录 > 仓库根 > 全局
 2. **越薄越好**：L1 ≤50 行 / L2 ≤150 行 / L3 ≤50 行，同一条规则只出现在一层
-3. **按需加载**：常驻的只有索引，细节路由到 `docs/` 用到再读
+3. **按需加载**：常驻的只有索引，细节路由到文档用到再读

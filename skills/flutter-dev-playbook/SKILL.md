@@ -18,10 +18,8 @@ argument-hint: '[场景：新工程|新需求|接口|业务|UI] 或直接描述�
 
 ## 启动判定（每次先做）
 
-1. 当前仓库根有 `AGENTS.md`？
-   - **有** → 它是本项目宪法，先完整读它（命令/目录/路由表/红线）
-   - **没有** → 按 `.github/skills/flutter-dev-playbook/rules/flutter/PLAYBOOK-NEW-PROJECT.md` 补齐（选型先问用户）
-2. 有 `docs/INTAKE.md`？→ 核对 product/api/figma 材料是否就位，缺项按降级策略推进
+统一以 `rules/WORKFLOW.md` 为准（流程图 + 装配/循环各节）：无根 `AGENTS.md` → 走新工程流程
+（选型先问用户）；有则按其路由表工作；材料核对与推演模式声明见 WORKFLOW「交接与装配」节。
 
 ## 场景分派
 

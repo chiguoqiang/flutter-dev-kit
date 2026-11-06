@@ -178,7 +178,7 @@ flowchart TD
 > 「实现客户搜索模块，接口文档：<Apifox 链接>」
 > 「加一个错题本：答错的题自动收录，可重做，答对移除」
 
-也可先建需求卡（复制 `flutter/FEATURE-CARD.md` 到 `docs/features/`）再发给 Agent——大需求推荐。
+也可先建需求卡（复制 `flutter/FEATURE-CARD-TEMPLATE.md` 到 `docs/features/`）再发给 Agent——大需求推荐。
 
 ### B-4 Agent 按层补齐（[Agent]，顺序固定不跳步）
 
