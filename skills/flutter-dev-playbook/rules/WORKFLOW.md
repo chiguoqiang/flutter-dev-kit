@@ -2,7 +2,53 @@
 
 > 本文是整个体系的**主流程地图**：两条主线——「新建项目」（从零到可开发）与「新增业务」（项目存续期的日常）。
 > 每一步都标注了 **[你]**（用户操作）与 **[Agent]**（Copilot 自动执行），你只需要做带 [你] 的步骤。
-> 细节按需深入：Playbook×5 与模板都在本 rules/ 目录。
+> 细节按需深入：Playbook×6 与模板都在本 rules/ 目录。
+
+## 全景流程图（一图看懂 kit 使用全流程）
+
+```mermaid
+flowchart TD
+    subgraph S0["准备（一次性）"]
+        A1[clone flutter-dev-kit] --> A2{用法?}
+        A2 -->|新项目| B1
+        A2 -->|存量项目| B2
+        A2 -->|仅本机装调度器| A3["install.sh --personal（可选）"]
+    end
+
+    subgraph S1["新项目 · init"]
+        B1["./flutter-dev-kit/install.sh '描述'"] --> B3["自动：工程+依赖+规则库<br/>+.github Skill/Agent+CI门禁<br/>+docs文档区+tech-stack(预填)<br/>自删kit→git首提交"]
+    end
+
+    subgraph S2["存量项目 · --project"]
+        B2["install.sh --project /path"] --> B4["注入 Skill+Agent+INTAKE<br/>+tech-stack反推草稿"]
+        B4 --> B5["「反推并确认 tech-stack」<br/>Agent 按代码识别选型回填"]
+    end
+
+    B3 --> C1
+    B5 --> C1
+
+    subgraph S3["交接与装配（每项目一次）"]
+        C1["product.md 必填<br/>（缺→MVP草案确认一次）"] --> C2["API/Figma 可缺：<br/>声明[推演]模式生成草稿"] --> C3["架构：起草/反哺 architecture.md<br/>（你确认；改分层先ADR）"]
+        C0["公司规范 docs/rules/（可选）"] -.最高优先.-> C3
+    end
+
+    C3 --> D0["「开始开发」"]
+
+    subgraph S4["模块开发循环（Agent 自主）"]
+        D0 --> D1["⓪开工对表：重读 tech-stack 最新版"]
+        D1 --> D2["①model②service③state④UI⑤test<br/>规范：docs/rules > libs > L3默认"]
+        D2 --> D3["DoD：analyze+format+test+红线"]
+        D3 --> D4["规则回写"]
+    end
+
+    D4 --> E1["交付报告 docs/delivery/<br/>实现/检查/建议（含★待确认）"]
+    E1 --> E2["你：审★拍板 + 冒烟"]
+    E2 --> E3["提交（报告+文档+代码同PR）→ push"]
+    E3 --> E4{"CI 门禁"}
+    E4 -->|红叉| D2
+    E4 -->|绿勾| F1["交付闭环"]
+    F1 -.新需求回到循环.-> D1
+```
 
 ---
 
