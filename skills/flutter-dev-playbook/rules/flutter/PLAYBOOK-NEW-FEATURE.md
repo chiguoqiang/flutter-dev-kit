@@ -26,6 +26,10 @@
 
 ## 第 3 步 · 按层补齐（实现顺序固定）
 
+### ⓪ 开工前对表（每次）
+重读 `docs/tech-stack.yaml` 最新内容：选型/版本以**此刻文件**为准（用户可能刚改）；
+与 pubspec 不一致先声明差异再同步，禁止按旧选型惯性实现；架构模式变更需先 ADR。
+
 ### ① models（若有）
 - 新增/修改 model：`final` 字段 + `fromJson`/`toJson` + `==`/`hashCode` + `copyWith`
 - 用了 json_serializable/freezed → 跑 `dart run build_runner build --delete-conflicting-outputs`

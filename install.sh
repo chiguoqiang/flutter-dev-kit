@@ -59,6 +59,53 @@ inject_project() {
     cp "$SKILL_DIR_SRC/rules/INTAKE.md" "$proj/docs/INTAKE.md"
   fi
 
+  # 存量项目：无 tech-stack.yaml 时从 pubspec 反推生成草稿（选型标 unknown，待 Agent 首次会话确认）
+  if [ -f "$proj/pubspec.yaml" ] && [ ! -f "$proj/docs/tech-stack.yaml" ]; then
+    mkdir -p "$proj/docs"
+    gen_deps() {  # $1=pubspec 段名(dependencies|dev_dependencies) $2=pubspec 路径
+      awk -v sect="$1" '
+        $0 ~ "^" sect ":" { in_s = 1; next }
+        in_s && /^[a-zA-Z]/ { in_s = 0 }
+        in_s && /^  [a-zA-Z_][a-zA-Z0-9_]*:/ {
+          k = $1; sub(":$", "", k); sub(/^ +/, "", k)
+          if (k != "sdk" && k != "flutter" && k != "flutter_test") printf "  %s: \"按 pubspec 实际约束填写\"\n", k
+        }' "$2"
+    }
+    {
+      echo "# 技术选型 · 唯一事实源（install.sh 从 pubspec 反推草稿，待确认）"
+      echo "# ⚠️ 选型字段为 unknown：首次会话对 Agent 说「反推并确认 tech-stack」完成初始化"
+      echo ""
+      echo "meta:"
+      echo "  app_name: $(basename "$proj")"
+      echo "  created_at: $(date +%F)"
+      echo ""
+      echo "architecture:"
+      echo "  pattern: unknown   # 待 Agent 从代码识别（mvvm/mvc/clean/mvi）"
+      echo "  binding: unknown"
+      echo ""
+      echo "state_management: unknown   # 待识别：看 import（flutter_riverpod/flutter_bloc/get/provider）"
+      echo "network: unknown            # 待识别：dio/http"
+      echo "router: unknown             # 待识别：go_router/命名路由/Navigator"
+      echo "serialization: unknown      # 待识别：json_serializable/freezed/手写"
+      echo "mock: unknown"
+      echo ""
+      echo "dependencies:"
+      gen_deps dependencies "$proj/pubspec.yaml"
+      echo ""
+      echo "dev_dependencies:"
+      gen_deps dev_dependencies "$proj/pubspec.yaml"
+      echo ""
+      echo "conventions:"
+      echo "  import_style: package"
+      echo "  i18n: unknown"
+      echo "  naming_state_file: unknown"
+      echo ""
+      echo "notes: >-"
+      echo "  存量项目反推草稿：依赖清单来自 pubspec；选型字段首次会话由 Agent 识别后回填。"
+    } > "$proj/docs/tech-stack.yaml"
+    echo "✅ tech-stack 草稿: $proj/docs/tech-stack.yaml（从 pubspec 反推；首次会话说「反推并确认 tech-stack」）"
+  fi
+
   echo
   echo "📌 全部落在工程内：git commit 后随仓库分发，同事 clone 即自动生效（无需安装）。"
   echo "📌 产品文档放 docs/（见 docs/INTAKE.md），对 Copilot 说「开始开发」即可。"

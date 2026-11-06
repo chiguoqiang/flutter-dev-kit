@@ -20,6 +20,14 @@ name: Flutter 规范开发
    - 并读 `docs/architecture/architecture.md`（若有）：架构唯一事实源——分层依赖/模块边界；
      不存在且为存量工程 → 按 PLAYBOOK-ARCHITECTURE 通道 B 反哺草稿；改动分层/依赖方向/
      基础设施级三方库前必须先出 ADR，未出不得动代码
+1.5 读 `docs/tech-stack.yaml`（技术选型唯一事实源）：
+   - **不存在**（存量项目）→ 用户说「反推并确认 tech-stack」时：扫描 pubspec 依赖 + 代码
+     import 特征（riverpod/bloc/get/provider、dio/http、go_router…）识别选型，回填该文件
+     并向用户列出识别结论待确认；未确认前按现状代码推断的选型工作，且在汇报中注明
+   - **存在且有 unknown 字段** → 主动提醒用户先完成反推确认
+   - **时效铁律**：每个模块/需求**开工前必须重新读该文件当前内容**（用户可能刚改过）；
+     实现一律以刚读到的最新版为准。发现文件与 pubspec/代码不一致 → 先向用户声明差异，
+     以 tech-stack 为目标同步（除非用户明说以现状为准则先更新文件），禁止默默按旧选型继续
    - 并检查 `docs/rules/*.md`（公司/项目自定义规范，优先级最高）：存在则先读、
      执行时以它为准，并在汇报中声明「已按项目规范执行」；同名文件覆盖 kit 默认对应层，
      库级规范（Bloc/GetX 等）见 `rules/flutter/libs/`
